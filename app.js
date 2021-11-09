@@ -25,6 +25,29 @@ app.get('/api/v1/tours', (req, res) => {
 
 })
 
+app.get('/api/v1/tours/:id', (req, res) => {
+
+    // console.log(req.params.id + 1)
+
+    const id = req.params.id * 1
+    const tour = tours.find((tours) => tours.id === id)
+
+    if(!tour){
+        return res.status(404).json({
+            status: "fail",
+            message: "Not found tours"
+        })
+    }
+
+    res.json({
+        status: "success",
+        data: {
+            tour: tour
+        }
+    })
+
+})
+
 app.post('/api/v1/tours', (req, res) => {
 
     // console.log(req.body)
@@ -44,8 +67,6 @@ app.post('/api/v1/tours', (req, res) => {
         })
 
     })
-
-    // res.send('done')
 
 
 })
