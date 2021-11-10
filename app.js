@@ -93,6 +93,22 @@ app.patch('/api/v1/tours/:id', (req, res) => {
 
 })
 
+app.delete('/api/v1/tours/:id', (req, res) =>{
+
+    const id = req.params.id * 1
+    const tour = tours.find((tours) => tours.id === id)
+
+    if(!tour){
+        return res.status(404).json({
+            status: "fail",
+            message: "deleted"
+        })
+    }
+
+
+
+})
+
 
 
 app.listen('3200', () => {
