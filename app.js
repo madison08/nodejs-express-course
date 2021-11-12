@@ -7,6 +7,17 @@ const app = express()
 
 app.use(express.json())
 
+app.use((req, res, next) =>{
+
+    console.log('my custom middleware')
+
+    // res.send('success')
+
+    next()
+
+
+})
+
 
 const tours = JSON.parse(fs.readFileSync(__dirname + '/dev-data/tours.json',"utf-8"))
 
@@ -121,6 +132,7 @@ const deleteTour = (req, res) =>{
 app.route('/api/v1/tours')
     .get(getAllTour)
     .post(createTour)
+    
 app.route('/api/v1/tours/:id')
     .get(getTour)
     .patch(updateTour)
