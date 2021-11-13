@@ -131,6 +131,27 @@ const deleteTour = (req, res) =>{
 // app.delete('/api/v1/tours/:id', deleteTour)
 
 
+const getAllUsers = (req, res) => {
+    res.send('welcome to user route, ok men')
+}
+
+const creataUser = (req, res) =>{
+    res.send('user created')
+}
+
+const getUser = (req, res) => {
+    res.send('get user')
+}
+
+const updateUser = (req, res) => {
+    res.send('update user')
+}
+
+const deleteUser = (req, res) => {
+    res.send('delete user')
+}
+
+
 app.route('/api/v1/tours')
     .get(getAllTour)
     .post(createTour)
@@ -139,6 +160,16 @@ app.route('/api/v1/tours/:id')
     .get(getTour)
     .patch(updateTour)
     .delete(deleteTour)
+
+
+app.route('/api/v1/users')
+    .get(getAllUsers)
+    .post(creataUser)
+
+app.route('/api/v1/users/:id')
+    .get(getUser)
+    .patch(updateUser)
+    .delete(deleteUser)
 
 
 
