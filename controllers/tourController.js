@@ -1,5 +1,6 @@
 
 const fs = require('fs')
+const { runInNewContext } = require('vm')
 
 
 const tours = JSON.parse(fs.readFileSync(__dirname + '/../dev-data/tours.json',"utf-8"))
@@ -22,6 +23,18 @@ exports.checkID = (req, res, next, val) => {
 
     next()
 
+}
+
+exports.checkBody = (req, res, next) =>{
+    console.log('before create')
+
+    console.log(req.body)
+
+    if(req.body.name && req.body.price){
+        return next()
+    }
+
+    res.send('please enter price and name')
 }
 
 exports.getAllTour = (req, res) => {

@@ -9,6 +9,7 @@ const userRouter = require('./routes/userRoutes')
 
 app.use(morgan('dev'))
 app.use(express.json())
+// app.use(express.urlencoded(true))
 
 app.use((req, res, next) =>{
 
