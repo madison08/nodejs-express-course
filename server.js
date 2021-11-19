@@ -27,6 +27,18 @@ const tourSchema = new mongoose.Schema({
 
 const Tour = mongoose.model('Tour', tourSchema)
 
+const test = new Tour({
+    name: 'The forest hikerwer',
+    rating: 4.7,
+    price: 485
+})
+
+test.save().then(data => {
+    console.log(data)
+}).catch(err => {
+    console.log(err)
+})
+
 app.listen('3200', () => {
 
     console.log('[server] running on http://localhost:3200')
