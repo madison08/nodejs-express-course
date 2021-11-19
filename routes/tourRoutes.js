@@ -6,7 +6,7 @@ const { createTour,getAllTour,deleteTour,getTour,updateTour, checkID, checkBody 
 const router = express.Router()
 
 
-router.param('id', checkID)
+// router.param('id', checkID)
 
 // create a check body middleware
 

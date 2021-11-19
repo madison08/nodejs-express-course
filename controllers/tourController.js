@@ -1,29 +1,29 @@
 
 const fs = require('fs')
-const { runInNewContext } = require('vm')
+const Tour = require('../models/tourModel')
 
 
 const tours = JSON.parse(fs.readFileSync(__dirname + '/../dev-data/tours.json',"utf-8"))
 
 
-exports.checkID = (req, res, next, val) => {
+// exports.checkID = (req, res, next, val) => {
 
-    console.log('val id: ', val)
+//     console.log('val id: ', val)
 
-    const id = val * 1
-    const tour = tours.find((tours) => tours.id === id)
+//     const id = val * 1
+//     const tour = tours.find((tours) => tours.id === id)
 
 
-    if(!tour){
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Invalid ID'
-        })
-    }
+//     if(!tour){
+//         return res.status(404).json({
+//             status: 'fail',
+//             message: 'Invalid ID'
+//         })
+//     }
 
-    next()
+//     next()
 
-}
+// }
 
 exports.checkBody = (req, res, next) =>{
     console.log('before create')
@@ -51,19 +51,15 @@ exports.getAllTour = (req, res) => {
 
 exports.getTour = (req, res) => {
 
-    // console.log(req.params.id + 1)
+    // const id = req.params.id * 1
+    // const tour = tours.find((tours) => tours.id === id)
 
-
-
-    const id = req.params.id * 1
-    const tour = tours.find((tours) => tours.id === id)
-
-    if(!tour){
-        return res.status(404).json({
-            status: "fail",
-            message: "Not found tours"
-        })
-    }
+    // if(!tour){
+    //     return res.status(404).json({
+    //         status: "fail",
+    //         message: "Not found tours"
+    //     })
+    // }
 
     res.json({
         status: "success",
@@ -77,21 +73,23 @@ exports.getTour = (req, res) => {
 exports.createTour = (req, res) => {
 
 
-    const newId = tours[tours.length - 1].id + 1
-    const newTours = Object.assign({ id: newId }, req.body)
+    // const newId = tours[tours.length - 1].id + 1
+    // const newTours = Object.assign({ id: newId }, req.body)
 
-    tours.push(newTours)
+    // tours.push(newTours)
 
-    fs.writeFile(__dirname + '/dev-data/tours.json', JSON.stringify(tours), (err) => {
+    // fs.writeFile(__dirname + '/dev-data/tours.json', JSON.stringify(tours), (err) => {
 
-        res.status(201).json({
-            status: "success",
-            data: {
-                tour: newTours
-            }
-        })
+    //     res.status(201).json({
+    //         status: "success",
+    //         data: {
+    //             tour: newTours
+    //         }
+    //     })
 
-    })
+    // })
+
+    
 
 
 }
@@ -120,8 +118,8 @@ exports.updateTour = (req, res) => {
 
 exports.deleteTour = (req, res) =>{
 
-    const id = req.params.id * 1
-    const tour = tours.find((tours) => tours.id === id)
+    // const id = req.params.id * 1
+    // const tour = tours.find((tours) => tours.id === id)
 
     if(!tour){
         return res.status(404).json({
