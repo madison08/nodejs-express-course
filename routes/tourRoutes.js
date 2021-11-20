@@ -13,7 +13,7 @@ const router = express.Router()
 
 router.route('/')
 .get(getAllTour)
-.post(checkBody ,createTour)
+.post(createTour)
 
 
 // router.get('/', getAllTour)

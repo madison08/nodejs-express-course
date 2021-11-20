@@ -25,17 +25,17 @@ const tours = JSON.parse(fs.readFileSync(__dirname + '/../dev-data/tours.json',"
 
 // }
 
-exports.checkBody = (req, res, next) =>{
-    console.log('before create')
+// exports.checkBody = (req, res, next) =>{
+//     console.log('before create')
 
-    console.log(req.body)
+//     console.log(req.body)
 
-    if(req.body.name && req.body.price){
-        return next()
-    }
+//     if(req.body.name && req.body.price){
+//         return next()
+//     }
 
-    res.send('please enter price and name')
-}
+//     res.send('please enter price and name')
+// }
 
 exports.getAllTour = (req, res) => {
 
@@ -70,27 +70,26 @@ exports.getTour = (req, res) => {
 
 }
 
-exports.createTour = (req, res) => {
+exports.createTour = async (req, res) => {
 
+    try{
 
-    // const newId = tours[tours.length - 1].id + 1
-    // const newTours = Object.assign({ id: newId }, req.body)
+        const newTour =  await Tour.create(req.body)
 
-    // tours.push(newTours)
+        res.status(201).json({
+            status: "success",
+            data: {
+                tour: newTour
+            }
+        })
 
-    // fs.writeFile(__dirname + '/dev-data/tours.json', JSON.stringify(tours), (err) => {
+    }catch(err){
 
-    //     res.status(201).json({
-    //         status: "success",
-    //         data: {
-    //             tour: newTours
-    //         }
-    //     })
-
-    // })
-
-    
-
+        res.status(400).json({
+            status: "fail",
+            message: err
+        })
+    }
 
 }
 
