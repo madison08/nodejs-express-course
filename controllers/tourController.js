@@ -3,7 +3,7 @@ const fs = require('fs')
 const Tour = require('../models/tourModel')
 
 
-const tours = JSON.parse(fs.readFileSync(__dirname + '/../dev-data/tours.json',"utf-8"))
+// const tours = JSON.parse(fs.readFileSync(__dirname + '/../dev-data/tours.json',"utf-8"))
 
 
 // exports.checkID = (req, res, next, val) => {
@@ -37,19 +37,50 @@ const tours = JSON.parse(fs.readFileSync(__dirname + '/../dev-data/tours.json',"
 //     res.send('please enter price and name')
 // }
 
-exports.getAllTour = (req, res) => {
+exports.getAllTour = async (req, res) => {
 
-    res.json({
-        status: "success",
-        results: tours.length, 
-        data: {
-            tours
-        }
-    })
+    try{
+
+        const tours = await Tour.find({})
+
+        res.json({
+            status: "success",
+            results: tours.length, 
+            data: {
+                tours
+            }
+        })
+
+    }catch(err){
+        res.status(404).json({
+            status: 'fail',
+            messge: err
+        })
+    }
 
 }
 
-exports.getTour = (req, res) => {
+exports.getTour = async (req, res) => {
+
+    try{
+
+        const tour = await Tour.findById(req.params.id)
+
+        res.json({
+            status: "success",
+            data: {
+                tour: tour
+            }
+        })
+
+
+    }catch(err){
+        res.status(404).json({
+            status: 'fail',
+            messge: err
+        })
+    }
+
 
     // const id = req.params.id * 1
     // const tour = tours.find((tours) => tours.id === id)
@@ -61,12 +92,7 @@ exports.getTour = (req, res) => {
     //     })
     // }
 
-    res.json({
-        status: "success",
-        data: {
-            tour: tour
-        }
-    })
+   
 
 }
 
