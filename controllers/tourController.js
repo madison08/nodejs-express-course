@@ -119,24 +119,30 @@ exports.createTour = async (req, res) => {
 
 }
 
-exports.updateTour = (req, res) => {
+exports.updateTour = async (req, res) => {
 
-    // const id = req.params.id * 1
-    // const tour = tours.find((tours) => tours.id === id)
+    try{
 
-    // if(!tour){
-    //     return res.status(404).json({
-    //         status: "fail",
-    //         message: "Not found tours"
-    //     })
-    // }
+        const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+            new: true, //permet de renvoyer la version mise a jour du document 
+            runValidators: true
+        })
 
-    res.status(200).json({
-        status: "success",
-        data: {
-            tour: 'tours is updated'
-        }
-    })
+        res.status(200).json({
+            status: "success",
+            data: {
+                tour
+            }
+        })
+    }catch(err){
+
+        res.status(400).json({
+            status: "fail",
+            message: err
+        })
+    }
+
+    
 
 
 }
