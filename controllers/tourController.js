@@ -41,7 +41,14 @@ exports.getAllTour = async (req, res) => {
 
     try{
 
-        const tours = await Tour.find({})
+
+        // const tours = await Tour.find({
+        //     duration: 5,
+        //     difficulty: 'easy'
+        // })
+
+
+        const tours = await Tour.find(req.query)
 
         res.json({
             status: "success",

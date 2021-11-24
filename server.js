@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const dotenv = require('dotenv/config')
 const app = require('./app')
 
 
@@ -23,8 +23,8 @@ mongoose.connect('mongodb://localhost:27017/natours-app').then((res) => {
 //     console.log(err)
 // })
 
-app.listen('3200', () => {
+app.listen(`${process.env.PORT}`, () => {
 
-    console.log('[server] running on http://localhost:3200')
+    console.log(`[server] running on http://localhost:${process.env.PORT}`)
 })
 
