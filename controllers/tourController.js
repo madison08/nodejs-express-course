@@ -1,4 +1,5 @@
 
+const { match } = require('assert');
 const fs = require('fs')
 const Tour = require('../models/tourModel')
 
@@ -41,14 +42,22 @@ exports.getAllTour = async (req, res) => {
 
     try{
 
+        // 1) filtering
+        const queryObj = { ...req.query }
 
         // const tours = await Tour.find({
         //     duration: 5,
         //     difficulty: 'easy'
         // })
 
+        let queryStr = JSON.stringify(queryObj);
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`)
 
-        const tours = await Tour.find(req.query)
+        console.log(JSON.parse(queryStr))
+
+
+        // const tours = await Tour.find(req.query)
+        const tours = await Tour.find(JSON.parse(queryStr))
 
         res.json({
             status: "success",
