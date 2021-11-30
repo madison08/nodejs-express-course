@@ -1,7 +1,7 @@
 const express = require('express')
 // const fs = require('fs')
 
-const { createTour,getAllTour,deleteTour,getTour,updateTour, checkID, checkBody } = require('../controllers/tourController')
+const { createTour,getAllTour,deleteTour,getTour,updateTour,aliasTopTours, checkID, checkBody } = require('../controllers/tourController')
 
 const router = express.Router()
 
@@ -10,6 +10,7 @@ const router = express.Router()
 
 // create a check body middleware
 
+router.route('/top-5-cheap').get(aliasTopTours,getAllTour)
 
 router.route('/')
 .get(getAllTour)

@@ -4,39 +4,16 @@ const fs = require('fs')
 const Tour = require('../models/tourModel')
 
 
-// const tours = JSON.parse(fs.readFileSync(__dirname + '/../dev-data/tours.json',"utf-8"))
 
+exports.aliasTopTours = async (req, res, next) => {
 
-// exports.checkID = (req, res, next, val) => {
+    req.query.limit = '5';
+    req.query.sort = '-ratingsAverage,price'
+    req.query.fields = 'name,price,ratingsAverage,summary,difficulty'
 
-//     console.log('val id: ', val)
+    next()
+}
 
-//     const id = val * 1
-//     const tour = tours.find((tours) => tours.id === id)
-
-
-//     if(!tour){
-//         return res.status(404).json({
-//             status: 'fail',
-//             message: 'Invalid ID'
-//         })
-//     }
-
-//     next()
-
-// }
-
-// exports.checkBody = (req, res, next) =>{
-//     console.log('before create')
-
-//     console.log(req.body)
-
-//     if(req.body.name && req.body.price){
-//         return next()
-//     }
-
-//     res.send('please enter price and name')
-// }
 
 exports.getAllTour = async (req, res) => {
 
@@ -64,15 +41,15 @@ exports.getAllTour = async (req, res) => {
         let query = Tour.find(JSON.parse(queryStr))
 
         // trie
-        // if(req.query.sort){
+        if(req.query.sort){
 
-        //     const sortBy = req.query.sort.split(',').join(' ')
-        //     console.log(sortBy)
+            const sortBy = req.query.sort.split(',').join(' ')
+            console.log(sortBy)
 
-        //     query = query.sort(sortBy)
-        // }else{
-        //     query = query.sort('-createAt')
-        // }
+            query = query.sort(sortBy)
+        }else{
+            query = query.sort('-createAt')
+        }
 
         // field limiting
         if(req.query.fields){
