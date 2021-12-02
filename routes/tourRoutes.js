@@ -1,7 +1,7 @@
 const express = require('express')
 // const fs = require('fs')
 
-const { createTour,getAllTour,deleteTour,getTour,updateTour,aliasTopTours,getTourStats , checkID, checkBody } = require('../controllers/tourController')
+const { createTour,getAllTour,deleteTour,getTour,updateTour,aliasTopTours,getTourStats, getMonthlyPlan, checkID, checkBody } = require('../controllers/tourController')
 
 const router = express.Router()
 
@@ -13,6 +13,8 @@ const router = express.Router()
 router.route('/top-5-cheap').get(aliasTopTours,getAllTour)
 
 router.route('/tour-stats').get(getTourStats)
+
+router.route('/monthly-plan/:year').get(getMonthlyPlan)
 
 router.route('/')
 .get(getAllTour)
