@@ -97,6 +97,17 @@ tourSchema.pre(/^find/, function(next){
 
 })
 
+// aggregation middleware
+
+tourSchema.pre('aggregate', function(next){
+
+    console.log('before aggregate')
+
+    console.log(this.pipeline())
+
+    next()
+})
+
 const Tour = mongoose.model('Tour', tourSchema)
 
 module.exports = Tour
