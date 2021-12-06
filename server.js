@@ -23,8 +23,21 @@ mongoose.connect('mongodb://localhost:27017/natours-app').then((res) => {
 //     console.log(err)
 // })
 
-app.listen(`${process.env.PORT}`, () => {
 
+
+
+
+// local port
+
+app.listen(`${process.env.PORT}`, () => {
     console.log(`[server] running on http://localhost:${process.env.PORT}`)
 })
+
+
+// expose our api external port
+
+// app.listen('8080',`${process.env.EXTERNAL_PORT}`, () => {
+
+//     console.log(`[server] running on ${process.env.EXTERNAL_PORT}`)
+// })
 
